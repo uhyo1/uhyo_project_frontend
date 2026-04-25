@@ -46,3 +46,6 @@ pnpm-debug.log*
 node_modules/
 dist/
 .vscode/
+node_modules/
+dist/
+.vscode/
