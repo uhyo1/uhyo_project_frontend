@@ -40,3 +40,43 @@ npm run dev
 ```sh
 npm run build
 ```
+
+# frontend (Vue 3 + Vite)
+
+UI を担当するフロントエンドアプリケーション。  
+backend_ui（8080）と通信してデータを表示します。
+
+---
+
+## 📦 役割
+
+- パスワード期限切れ一覧の表示
+- Axios による API 通信
+- UI レンダリング
+
+---
+
+## 🔗 主なページ
+
+| Path | Description |
+|------|-------------|
+| `/expired` | パスワード期限切れ一覧 |
+
+---
+
+## 🚀 起動
+npm install
+npm run dev
+
+
+ポート：**5173**
+
+---
+
+## 🧩 技術
+
+- Vue 3
+- Vite
+- Axios
+- Tailwind（導入予定）
+
