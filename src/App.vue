@@ -8,6 +8,7 @@
     <!-- サイドメニュー -->
     <div class="side-menu" :class="{ open: isOpen }">
       <ul>
+        <li><router-link to="/" @click="closeMenu">Home</router-link></li>
         <li><router-link to="/tasklist" @click="closeMenu">TaskList</router-link></li>
         <li><router-link to="/expired" @click="closeMenu">Expired Password List</router-link></li>
         <li><router-link to="/listselect1" @click="closeMenu">Select1</router-link></li>
