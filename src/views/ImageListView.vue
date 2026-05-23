@@ -3,16 +3,19 @@
     <h1>画像一覧（サムネイル）</h1>
 
     <div class="grid">
-      <div
-        v-for="img in images"
-        :key="img.imageId"
-        class="thumb"
-        @click="openImage(img.imageId)"
-      >
-        <img :src="`http://localhost:9001/images/file/${img.imageId}`" />
-      </div>
-    </div>
+  <div 
+    v-for="img in images" 
+    :key="img.id" 
+    class="thumb"
+    @click="goToViewer(img.id)"
+  >
+    <img :src="img.thumbnailUrl" />
   </div>
+</div>
+
+
+</div>
+
 </template>
 
 <script setup>
@@ -23,25 +26,38 @@ import { useRouter } from 'vue-router'
 const images = ref([])
 const router = useRouter()
 
+// ★ サムネイルをクリックした時だけ遷移する
+const goToViewer = (id) => {
+  router.push(`/randomimage/${id}`)
+}
+
 // ★ 全画像をロード
 const loadImages = async () => {
   try {
     const res = await axios.get('http://localhost:9001/images/all')
-    images.value = res.data
+
+    console.log("レスポンス:", res.data)
+
+    // ★ バックエンドのレスポンスを Vue 用に変換する
+    images.value = res.data.map(img => ({
+      id: img.imageId,   // ★ imageId を id に変換
+      thumbnailUrl: `http://localhost:9001/images/file/${img.imageId}` // ★ 表示用URLを生成
+    }))
+
   } catch (e) {
     console.error("画像一覧取得エラー:", e)
   }
 }
 
-// ★ サムネイルクリックで個別ビューへ
-const openImage = (id) => {
-  router.push(`/randomimage?id=${id}`)
-}
+
+// ★ setup のトップレベルで router.push を呼んではいけない
+// ★ ここにあった router.push(`/randomimage/${id}`) を削除！
 
 onMounted(() => {
   loadImages()
 })
 </script>
+
 
 <style scoped>
 .container {

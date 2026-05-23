@@ -1,68 +1,50 @@
 <template>
-  <div class="container">
-    <h1>ランダム画像ビューア</h1>
+  <div class="viewer">
+    <h1>画像ビューア</h1>
 
-    <div class="image-box">
-      <img v-if="imageUrl" :src="imageUrl" alt="random image" />
-      <p v-else>画像を読み込み中...</p>
-    </div>
+    <!-- ★ imageUrl がセットされたら画像を表示 -->
+    <img v-if="imageUrl" :src="imageUrl" class="main-image" />
 
-    <button @click="loadRandomImage" class="btn">次の画像</button>
+    <p v-else>画像を読み込み中...</p>
   </div>
 </template>
 
 <script setup>
+// ★ 必要なものを import
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { useRoute } from 'vue-router'
 
-const imageUrl = ref(null)
+// ★ URL から :id を取得する
+const route = useRoute()
+const imageId = route.params.id   // ← ここが最重要
 
-const loadRandomImage = async () => {
-  try {
-    const res = await axios.get('http://localhost:9001/images/random')
-    const id = res.data.imageId
+// ★ 表示する画像の URL を保持
+const imageUrl = ref("")
 
-    // ★ ここが最重要 ★
-    imageUrl.value = `http://localhost:9001/images/file/${id}`
-  } catch (e) {
-    console.error('画像取得エラー:', e)
-  }
+// ★ 選択された画像を読み込む関数
+const loadImage = () => {
+  // ★ サムネイル一覧で選んだ画像をそのまま表示する
+  //    /images/file/{id} で画像を返す API がある前提
+  imageUrl.value = `http://localhost:9001/images/file/${imageId}`
 }
 
-
+// ★ コンポーネントが表示されたら画像を読み込む
 onMounted(() => {
-  loadRandomImage()
+  loadImage()
 })
 </script>
 
 <style scoped>
-.container {
+.viewer {
   padding: 20px;
   text-align: center;
 }
 
-.image-box {
-  margin: 20px auto;
-}
-
-img {
+.main-image {
   max-width: 90%;
   max-height: 80vh;
+  object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 0 10px #333;
-}
-
-.btn {
-  padding: 10px 20px;
-  background: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-top: 20px;
-  font-size: 18px;
-}
-
-.btn:hover {
-  background: #45a049;
 }
 </style>

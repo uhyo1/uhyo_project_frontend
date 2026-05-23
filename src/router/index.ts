@@ -10,6 +10,8 @@ import FileList from "../components/FileList.vue";
 
 import RandomImageView from "../views/RandomImageView.vue";
 import ImageListView from "../views/ImageListView.vue";
+import RandomImageRandomView from "../views/RandomImageRandomView.vue";
+
 
 const routes = [
   { path: "/", component: HomeView },
@@ -25,7 +27,18 @@ const routes = [
   { path: "/tasklist", component: TaskList },
   
   { path: "/filelist", component: FileList },
-  { path: "/randomimage", component: RandomImageView },
+  {
+  path: "/randomimage",
+  name: "RandomImageRandom",
+   component: RandomImageRandomView
+  },
+  {
+  // ★ :id をつけることで /randomimage/6 にマッチする
+  path: '/randomimage/:id',
+  name: 'RandomImage',
+  component: RandomImageView
+},
+
   { path: "/imagelist", component: ImageListView },
   
 ];
