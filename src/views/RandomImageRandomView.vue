@@ -26,13 +26,13 @@ const imageUrl = ref("")
 const loadRandom = async () => {
   try {
     // ★ バックエンドのランダム画像 API を叩く
-    const res = await axios.get('http://localhost:9001/images/random')
+    const res = await axios.get('/images/random')
 
     // ★ 返ってくる JSON は { imageId: 123, filePath: "...", ... }
     const id = res.data.imageId
 
-    // ★ 表示用 URL を生成（あなたの API 仕様に合わせている）
-    imageUrl.value = `http://localhost:9001/images/file/${id}`
+    // ★ 表示用 URL を生成
+    imageUrl.value = `/images/file/${id}`
 
   } catch (e) {
     console.error("ランダム画像取得エラー:", e)
