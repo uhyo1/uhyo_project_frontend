@@ -24,8 +24,9 @@ const imageUrl = ref("")
 // ★ 選択された画像を読み込む関数
 const loadImage = () => {
   // ★ サムネイル一覧で選んだ画像をそのまま表示する
-  //    /images/file/{id} で画像を返す API がある前提
-  imageUrl.value = `http://localhost:9001/images/file/${imageId}`
+  //    フロントは Vite のプロキシ経由で backend_ui (http://localhost:8080) に
+  //    リクエストを投げるため、相対パスを使う
+  imageUrl.value = `/images/file/${imageId}`
 }
 
 // ★ コンポーネントが表示されたら画像を読み込む

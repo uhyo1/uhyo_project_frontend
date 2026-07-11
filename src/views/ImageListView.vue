@@ -34,14 +34,14 @@ const goToViewer = (id) => {
 // ★ 全画像をロード
 const loadImages = async () => {
   try {
-    const res = await axios.get('http://localhost:9001/images/all')
+    const res = await axios.get('/images/all')
 
     console.log("レスポンス:", res.data)
 
     // ★ バックエンドのレスポンスを Vue 用に変換する
     images.value = res.data.map(img => ({
       id: img.imageId,   // ★ imageId を id に変換
-      thumbnailUrl: `http://localhost:9001/images/file/${img.imageId}` // ★ 表示用URLを生成
+      thumbnailUrl: `/images/file/${img.imageId}` // ★ 表示用URLを生成
     }))
 
   } catch (e) {
