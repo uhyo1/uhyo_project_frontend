@@ -1,6 +1,9 @@
 import HomeView from "../views/HomeView.vue";
 import MazeView from "../components/MazeView.vue";
-import Blackjack from "../views/BlackjackView.vue"; 
+import Blackjack from "../views/BlackjackView.vue";
+// テトリス画面
+import TetrisView from "../views/TetrisView.vue";
+
 
 import { createRouter, createWebHistory } from "vue-router";
 import TaskList from "../components/TaskList.vue";
@@ -20,32 +23,30 @@ const routes = [
   // ★views配下
   { path: "/maze", component: MazeView },
   { path: "/blackjack", component: Blackjack },
-
+  
   // ★components配下
   { path: "/expired", component: ExpiredList },
   { path: "/listselect1", component: Select1 },
   { path: "/tasklist", component: TaskList },
   
   { path: "/filelist", component: FileList },
-  {
-  path: "/randomimage",
-  name: "RandomImageRandom",
-   component: RandomImageRandomView
-  },
+  { path: "/randomimage", name: "RandomImageRandom",
+   component: RandomImageRandomView },
   {
   // ★ :id をつけることで /randomimage/6 にマッチする
   path: '/randomimage/:id',
   name: 'RandomImage',
   component: RandomImageView
-},
-
+  },
+  { path: "/tetris",
+    name: "Tetris", component: TetrisView },
   { path: "/imagelist", component: ImageListView },
   
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 });
 
 export default router;

@@ -46,6 +46,13 @@
     <h2>リスト選択</h2>
     <p>select1 の画面</p>
   </div>
+
+  <div class="card" @click="go('/Tetris')">
+    <i class="fa-solid fa-list icon"></i>
+    <h2>テトリス</h2>
+    <p>Vue × Spring のテトリスゲーム</p>
+  </div>
+
 </div>
 
 </div>
