@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">牛乳伝説</h1>
+    <h1 class="title">休憩したほうが良い</h1>
 
     <div class="card-grid">
 
@@ -47,11 +47,12 @@
     <p>select1 の画面</p>
   </div>
 
-  <div class="card" @click="go('/Tetris')">
-    <i class="fa-solid fa-list icon"></i>
-    <h2>テトリス</h2>
-    <p>Vue × Spring のテトリスゲーム</p>
-  </div>
+ <div class="card" @click="go('/Tetris')">
+  <img src="@/assets/tetris_icon.png" alt="テトリスアイコン" class="icon" />
+  <h2>テトリス</h2>
+  <p>Vue × Spring のテトリスゲーム</p>
+</div>
+
 
 </div>
 
@@ -79,9 +80,20 @@ const go = (path) => {
 
 
 .icon {
-  font-size: 32px;
-  margin-bottom: 10px;
-  color: #444;
+  font-size: 22px;
+  margin-bottom: 16px;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+img.icon {
+  display: block;
 }
 
 .container {
@@ -102,13 +114,12 @@ const go = (path) => {
 }
 
 
-
-
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
   padding: 10px;
+  align-items: stretch;
 }
 
 .card {
@@ -120,6 +131,23 @@ const go = (path) => {
   transition: 
     transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.card h2 {
+  font-size: 20px;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.card p {
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.4;
 }
 
 .card:hover {
@@ -131,6 +159,7 @@ const go = (path) => {
   transform: scale(1.15);
   transition: transform 0.25s ease;
 }
+
 .card.disabled {
   opacity: 0.4;
   cursor: default;
