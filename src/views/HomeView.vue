@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">休憩したほうが良い</h1>
+    <h1 class="title">お前は休憩したほうが良い</h1>
 
     <div class="card-grid">
 
