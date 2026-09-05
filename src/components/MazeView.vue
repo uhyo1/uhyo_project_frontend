@@ -24,7 +24,7 @@ import axios from 'axios'
 const maze = ref([])
 
 const loadMaze = async () => {
-  const res = await axios.get('http://localhost:8080/maze/generate')
+  const res = await axios.get('/maze/generate')
   maze.value = res.data
 }
 

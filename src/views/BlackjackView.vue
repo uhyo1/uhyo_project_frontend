@@ -15,7 +15,7 @@ const dealer = ref([]);
 const message = ref("");
 
 // backend_ui のポートに合わせる
-const API = "http://localhost:8080/blackjack";
+const API = "/blackjack";
 
 // -----------------------------
 // カードオブジェクト → 画像パスへ変換

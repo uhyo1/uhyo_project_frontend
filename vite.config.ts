@@ -16,17 +16,37 @@ export default defineConfig({
     },
   },
   server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-        secure: false,
-      },
-      '/images': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-        secure: false,
-      },
+  proxy: {
+
+    '/api': {
+      target: 'http://localhost:8080',
+      changeOrigin: true,
+      secure: false,
     },
-  },
+
+    '/images': {
+      target: 'http://localhost:8080',
+      changeOrigin: true,
+      secure: false,
+    },
+
+    '/maze': {
+      target: 'http://localhost:8080',
+      changeOrigin: true,
+      secure: false,
+    },
+
+    '/blackjack': {
+      target: 'http://localhost:8080',
+      changeOrigin: true,
+      secure: false,
+    },
+
+    '/tetris': {
+      target: 'http://localhost:8080',
+      changeOrigin: true,
+      secure: false,
+    }
+  }
+}
 })
