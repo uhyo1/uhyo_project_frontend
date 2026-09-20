@@ -61,13 +61,22 @@ let gameStartTime = null;
 // 3. ゲーム開始
 // ================================
 async function startGame() {
+  if (gameInterval) {
+    clearInterval(gameInterval);
+    gameInterval = null;
+  }
+
   engine.initGame();
 
   // 状態を Vue 側に反映
   syncState();
 
-  // サーバーに開始ログ送信
-  await startGameApi();
+  // ログ送信の失敗でローカルゲームを止めない
+  try {
+    await startGameApi();
+  } catch (error) {
+    console.error("ゲーム開始ログを送信できませんでした。ゲームは継続します:", error);
+  }
 
   // ゲームループ開始
   gameStartTime = Date.now();
@@ -99,7 +108,11 @@ async function endGame() {
     duration: durationSec
   };
 
-  await finishGameApi(scoreData);
+  try {
+    await finishGameApi(scoreData);
+  } catch (error) {
+    console.error("ゲーム終了ログを送信できませんでした:", error);
+  }
 
   alert("ゲーム終了！ スコアを保存しました。");
 }

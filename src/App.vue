@@ -17,7 +17,7 @@
         <li><router-link to="/randomimage" @click="closeMenu">Random Image</router-link></li>
         <li><router-link to="/imagelist" @click="closeMenu">Image List</router-link></li>
         <li><router-link to="/Tetris" @click="closeMenu">Tetris</router-link></li>
-
+        <li><router-link to="/Othello" @click="closeMenu">Othello</router-link></li>
       </ul>
     </div>
 

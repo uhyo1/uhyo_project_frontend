@@ -68,6 +68,9 @@ export function createTetrisEngine() {
   // 次ミノ
   let nextPiece = null;
 
+  // エンジンが管理するゲームループ
+  let gameInterval = null;
+
   // スコア関連
   let score = 0;
   let lines = 0;
@@ -78,13 +81,16 @@ export function createTetrisEngine() {
   // ================================
   function spawnPiece() {
     const keys = Object.keys(tetrominoes);
-    const randomKey = keys[Math.floor(Math.random() * keys.length)];
-
-    currentPiece = tetrominoes[randomKey];
+    if (nextPiece === null) {
+      const randomKey = keys[Math.floor(Math.random() * keys.length)];
+      currentPiece = tetrominoes[randomKey];
+    } else {
+      currentPiece = nextPiece;
+    }
     currentX = 3;
     currentY = 0;
 
-    // 次ミノ生成
+    // 次ミノを先に生成しておき、次の接地時に currentPiece へ移す
     const nextKey = keys[Math.floor(Math.random() * keys.length)];
     nextPiece = tetrominoes[nextKey];
   }
@@ -198,10 +204,12 @@ export function createTetrisEngine() {
   // 9. ゲーム開始
   // ================================
   function initGame() {
+    stop();
     field = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
     score = 0;
     lines = 0;
     level = 1;
+    nextPiece = null;
     spawnPiece();
   }
 
@@ -209,12 +217,17 @@ export function createTetrisEngine() {
   // 9.5 start() をここに追加する
   // ================================
   function start() {
-    initGame();      // ゲーム初期化
-    // ゲームループ開始
-    // tick を一定間隔で呼び出す
-    setInterval(() => {
+    initGame();
+    gameInterval = setInterval(() => {
       tick();
     }, 500);
+  }
+
+  function stop() {
+    if (gameInterval !== null) {
+      clearInterval(gameInterval);
+      gameInterval = null;
+    }
   }
 
   // ================================
@@ -238,6 +251,7 @@ export function createTetrisEngine() {
     get level() { return level; },
     initGame,
     start,
+    stop,
     tick,
     moveLeft,
     moveRight,

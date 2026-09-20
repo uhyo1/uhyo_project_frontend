@@ -47,14 +47,20 @@
     <p>select1 の画面</p>
   </div>
 
- <div class="card" @click="go('/Tetris')">
-  <img src="@/assets/tetris_icon.png" alt="テトリスアイコン" class="icon" />
-  <h2>テトリス</h2>
-  <p>Vue × Spring のテトリスゲーム</p>
+  <div class="card" @click="go('/Tetris')">
+    <img src="@/assets/tetris_icon.png" alt="テトリスアイコン" class="icon" />
+    <h2>テトリス</h2>
+    <p>Vue × Spring のテトリスゲーム</p>
+  </div>
+
+  <div class="card" @click="go('/othello')">
+    <i class="fa-solid fa-chess-board icon"></i>
+    <h2>オセロ</h2>
+    <p>Vue × Spring のオセロゲーム</p>
+  </div>
+
 </div>
 
-
-</div>
 
 </div>
   

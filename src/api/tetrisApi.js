@@ -7,8 +7,8 @@
 
 import axios from "axios";
 
-// backend_ui の URL
-const BASE_URL = "http://localhost:8080/tetris";
+// Vite の開発プロキシ経由で backend_ui に接続する
+const BASE_URL = "/tetris";
 
 /**
  * ゲーム開始ログ送信
