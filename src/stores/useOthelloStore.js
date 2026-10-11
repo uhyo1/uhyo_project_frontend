@@ -62,23 +62,22 @@ export const useOthelloStore = defineStore('othello', {
       this.cpuLevel = data.cpuLevel;
       this.blackCount = data.blackCount;
       this.whiteCount = data.whiteCount;
-      this.isGameOver = data.isGameOver;
+      this.isGameOver = data.isGameOver ?? data.gameOver ?? false;
       this.tauntMessage = data.tauntMessage;
-      if (data.isGameOver) {
-        switch (data.winner) {
-          case "PLAYER":
-            this.winnerMessage = "あなたの勝ちです！";
-            break;
-    case "CPU":
-            this.winnerMessage = "CPU の勝ちです…";
-            break;
-          case "DRAW":
-            this.winnerMessage = "引き分けです";
-            break;
+      if (this.isGameOver) {
+        const playerCount = this.playerColor === 1 ? this.blackCount : this.whiteCount;
+        const cpuCount = this.cpuColor === 1 ? this.blackCount : this.whiteCount;
+
+        if (playerCount > cpuCount) {
+          this.winnerMessage = 'いい考察でした。また戦いましょう';
+        } else if (playerCount < cpuCount) {
+          this.winnerMessage = 'うむ。悪くない打ち筋だった。また戦いましょう';
+        } else {
+          this.winnerMessage = '引き分けですね。また戦いましょう';
         }
-    } else {
-            this.winnerMessage = null;
-    }
+      } else {
+        this.winnerMessage = null;
+      }
 
     }
   }

@@ -41,6 +41,9 @@ const cpuLevel = ref('NORMAL');
 
 const startGame = async () => {
   await store.newGame(playerColor.value, cpuLevel.value);
+  if (store.currentTurn === 'CPU' && !store.isGameOver) {
+    await store.cpuMove();
+  }
 };
 </script>
 
